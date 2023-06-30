@@ -1,26 +1,32 @@
 import mysql.connector
 
-#Establish a connection to MySQL server 
-con = mysql.connector.connect(
-    host='localhost',
-    user='root',
-    password='rootuser',
-    database='mydb'
-) 
+try:
+    # Establish a connection to the MySQL server
+    conn = mysql.connector.connect(
+        host='localhost',
+        user='root',
+        password='rootuser',
+        database='mydb'
+    )
 
-# Create a cursor object to execute SQL queries
-cursor = con.cursor()
+    if conn.is_connected():
+        print("Connection established successfully.")
+        # Create a cursor object to execute SQL queries
+        cursor = conn.cursor()
 
-# Execute an SQL query
-cursor.execute("SELECT * FROM autombile LIMIT 50")
+        # Execute an SQL query
+        cursor.execute("SELECT * FROM automobile LIMIT 10")
 
-# Fetch all rows returned by the query
-rows = cursor.fetchall()
+        # Fetch all rows returned by the query
+        rows = cursor.fetchall()
 
-# Process the results
-for row in rows:
-    print(row)
+        # Process the results
+        for row in rows:
+            print(row)
 
-# Close the cursor and the database connection
-cursor.close()
-con.close()
+        # Close the cursor and the database connection
+        cursor.close()
+        conn.close()
+
+except mysql.connector.Error as error:
+    print("Error connecting to MySQL:", error)
