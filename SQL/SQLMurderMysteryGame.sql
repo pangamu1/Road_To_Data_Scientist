@@ -27,7 +27,7 @@ FROM person
 WHERE address_street_name = 'Northwestern Dr'
 ORDER BY address_number DESC LIMIT 1    
 /*
-id	    name	        license_id	address_number	address_street_name	ssn
+id	name	        license_id  address_number	address_street_name  ssn
 14887	Morty Schapiro	118009	    4919	        Northwestern Dr	    111564949
 */
 
@@ -37,7 +37,7 @@ FROM person
 WHERE name like 'Annabel%'
 AND address_street_name = 'Franklin Ave'
 /*
-id	    name	        license_id	address_number	address_street_name	ssn
+id	name	        license_id   address_number  address_street_name     ssn
 16371	Annabel Miller	490173	    103	            Franklin Ave	    318771143
 */
 
@@ -45,9 +45,9 @@ id	    name	        license_id	address_number	address_street_name	ssn
 SELECT * 
 FROM drivers_license where ID = 118009 OR ID = 490173
 /*
-id	    age	height	eye_color	hair_color	gender	plate_number	car_make	    car_model
-118009	64	84	    blue	    white	    male	00NU00	        Mercedes-Benz	E-Class
-490173	35	65	    green	    brown	    female	23AM98	        Toyota	        Yaris
+id	age	height	eye_color   hair_color	gender	plate_number	car_make	car_model
+118009	64	84	blue	    white	male	00NU00	        Mercedes-Benz	E-Class
+490173	35	65	green	    brown	female	23AM98	        Toyota	        Yaris
 */
 
 -- Check for clues in other tables, start from get fit members table and see if they are a member:
@@ -55,8 +55,8 @@ SELECT *
 FROM get_fit_now_member 
 WHERE person_id = 14887 OR person_id = 16371
 /*
-id	    person_id	name	        membership_start_date	membership_status
-90081	16371	    Annabel Miller	20160208	            gold  
+id	person_id   name	        membership_start_date	membership_status
+90081	16371	    Annabel Miller	20160208	        gold  
 */ -- Morty is not a member and Annabel is a member since 2016
 
 -- Checking for more info from other tables similarly,
@@ -64,9 +64,9 @@ SELECT *
 FROM facebook_event_checkin 
 WHERE person_id = 14887 OR person_id = 16371
 /*
-person_id	event_id	event_name	            date
-14887	    4719	    The Funky Grooves Tour	20180115
-16371	    4719	    The Funky Grooves Tour	20180115
+person_id   event_id	event_name	        date
+14887	    4719	The Funky Grooves Tour	20180115
+16371	    4719	The Funky Grooves Tour	20180115
 */ -- Seems both have attended the same event and it's a possibility that the crime happened in The Funky Grooves Tour EVENT
 
 -- Checking for more info from other tables similarly,
@@ -74,7 +74,7 @@ SELECT *
 FROM interview 
 WHERE person_id = 14887 OR person_id = 16371
 /*
-person_id	transcript
+person_id   transcript
 14887	    I heard a gunshot and then saw a man run out. He had a "Get Fit Now Gym" bag. The membership number on the bag started with "48Z". Only gold members have those bags. The man got into a car with a plate that included "H42W".
 16371	    I saw the murder happen, and I recognized the killer from my gym when I was working out last week on January the 9th.
 */ -- from information here, we need to filter out information one by one from respective tables
@@ -85,9 +85,9 @@ FROM get_fit_now_member
 WHERE id LIKE '48Z%' 
 AND membership_status = 'gold'
 /*
-id	    person_id	name	        membership_start_date	membership_status
-48Z7A	28819	    Joe Germuska	20160305	            gold
-48Z55	67318	    Jeremy Bowers	20160101	            gold
+id	person_id   name	        membership_start_date	membership_status
+48Z7A	28819	    Joe Germuska	20160305	        gold
+48Z55	67318	    Jeremy Bowers	20160101	        gold
 */ -- We now have two potential leads, continue to search for more clues provided by Morty and Annabel
 
 -- Check if the Car Number Plate matches these two leads:
