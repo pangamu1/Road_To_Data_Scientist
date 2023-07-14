@@ -1,6 +1,12 @@
-/* Interview Prep by Data Lemur */
+/* Interview Prep based on Questions from Data Lemur 
+    Modified to understand the concepts and for my own practices */
 
-/* Question 1:  Page With No Likes [Facebook SQL Interview Question] - Difficulty Level: Easy
+-- Question 1:  Players with no direct freekicks taken by team - Difficulty Level: Easy
+SELECT players.name, players.team
+FROM fpl.players
+JOIN fpl.stats
+ON players.id = stats.id
+WHERE direct_freekicks_order = 0 AND team = "Arsenal"
 
-Assume you're given two tables containing data about Facebook Pages and their respective likes (as in "Like a Facebook Page").
-Write a query to return the IDs of the Facebook pages that have zero likes. The output should be sorted in ascending order based on the page IDs. */
+
+
