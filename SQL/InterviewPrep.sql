@@ -21,7 +21,9 @@ FROM
   SUM(CASE WHEN team IN ('Arsenal', 'Chelsea') THEN 1 ELSE 0 END) AS Rest 
 FROM fpl.players;
 
-   
+SELECT *
+FROM players
+WHERE team NOT IN 'Chelsea'
 
 
 
