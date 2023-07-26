@@ -23,7 +23,7 @@ FROM fpl.players;
 
 SELECT *
 FROM players
-WHERE team NOT IN 'Chelsea'
+WHERE team NOT IN 'Arsenal'
 
 
 
